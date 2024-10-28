@@ -2,7 +2,6 @@ package com.example.cli.commands;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
 import com.example.cli.main.CommandFactory;
 
 public class PipeCommand implements Command {
@@ -13,9 +12,10 @@ public class PipeCommand implements Command {
             return;
         }
 
-        // Assuming args[0] is the first command and args[1] is the second command
-        Command firstCommand = CommandFactory.getCommand(args[0], new String[] {}); // Pass appropriate args
-        Command secondCommand = CommandFactory.getCommand(args[1], new String[] {}); // Pass appropriate args
+        // First command
+        Command firstCommand = CommandFactory.getCommand(args[0], new String[] {});
+        // Second command
+        Command secondCommand = CommandFactory.getCommand(args[1], new String[] {});
 
         // Capture output from the first command
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -23,22 +23,23 @@ public class PipeCommand implements Command {
         System.setOut(new PrintStream(outputStream));
 
         if (firstCommand != null) {
-            firstCommand.execute(new String[] {});
+            firstCommand.execute(new String[] {}); // Execute first command
         }
 
-        System.setOut(originalOut); // Restore original output
-
-        // Get the output from the first command
-        String commandOutput = outputStream.toString();
+        // Restore original output
+        System.setOut(originalOut);
+        String commandOutput = outputStream.toString(); // Get the captured output
 
         // Now we would pass this output to the second command
-        // This part will depend on how you implement the second command
-        // You might need to change the signature of commands to accept input
+        // Here you might want to modify secondCommand to accept input
+        // For simplicity, we will just print it out
+        System.out.println("Output from first command: " + commandOutput);
 
-        System.out.println("Output from first command: " + commandOutput); // Just for demo purposes
         if (secondCommand != null) {
-            // Execute the second command
-            secondCommand.execute(new String[] {}); // Replace with actual output input if needed
+            // If secondCommand can accept input, you might need to modify its execute
+            // method
+            // For demo purposes, we'll just execute it without any args
+            secondCommand.execute(new String[] {});
         }
     }
 }

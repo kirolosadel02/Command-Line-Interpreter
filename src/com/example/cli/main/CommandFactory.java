@@ -18,8 +18,8 @@ public class CommandFactory {
             case "mv" -> new MvCommand();
             case "rm" -> new RmCommand();
             case "cat" -> new CatCommand();
-            case ">" -> new RedirectCommand(false); // Redirecting output
-            case ">>" -> new RedirectCommand(true); // Appending output
+            case ">" -> new RedirectCommand(false);
+            case ">>" -> new RedirectCommand(true);
             case "|" -> new PipeCommand();
             case "exit" -> new ExitCommand();
             case "help" -> new HelpCommand();
