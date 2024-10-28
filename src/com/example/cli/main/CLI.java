@@ -46,7 +46,7 @@ public class CLI {
 
     private void executeSingleCommand(String input) {
         String[] tokens = input.split(" ");
-        Command command = CommandFactory.getCommand(tokens[0]);
+        Command command = CommandFactory.getCommand(tokens[0], getCommandArgs(tokens)); // Updated here
         if (command != null) {
             command.execute(getCommandArgs(tokens));
         } else {
@@ -88,7 +88,7 @@ public class CLI {
         for (int i = 0; i < commands.length; i++) {
             String command = commands[i].trim();
             String[] tokens = command.split(" ");
-            Command cmd = CommandFactory.getCommand(tokens[0]);
+            Command cmd = CommandFactory.getCommand(tokens[0], getCommandArgs(tokens)); // Updated here
 
             if (cmd == null) {
                 System.out.println("Command not recognized: " + tokens[0]);
